@@ -1,0 +1,14 @@
+int sum(int a, int b) -> int {
+    return a + b;
+}
+
+var x: int = 4;
+var y: int = 7;
+
+echo(sum(x, y));
+
+out[result.txt]: "Result is %d", sum(x, y);
+
+inline_c {
+    printf("Inline C OK!\n");
+}
