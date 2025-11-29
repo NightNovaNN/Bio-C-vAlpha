@@ -1,16 +1,19 @@
-BioC
+# BioC
 
-BioC is a modern, safe, developer-friendly language that transpiles directly into clean, portable C.
-It aims to make C development simpler, less error-prone, and far more expressive—without sacrificing performance or compatibility.
+BioC is a modern, safe, developer-friendly language that transpiles directly into clean, portable ANSI C.  
+It provides a comfortable syntax, safer patterns, and powerful high-level features while preserving the performance and compatibility of traditional C.
 
-BioC acts as the TypeScript of C:
-you write high-level, comfortable code, and the BioC compiler converts it into normal ANSI C that works anywhere.
+BioC acts as a “TypeScript for C”:  
+you write expressive BioC code, and the compiler generates predictable plain C.
 
-✨ Features
-• Modern Syntax
+---
 
-BioC introduces clean, readable syntax for functions, variables, and I/O while keeping full low-level control.
+## Features
 
+### Modern, Clean Syntax
+BioC introduces a readable style for defining functions, variables, and logic.
+
+```bioc
 int sum(int a, int b) -> int {
     return a + b;
 }
@@ -19,34 +22,43 @@ var x: int = 4;
 var y: int = 7;
 
 echo(sum(x, y));
+```
 
-• File Output Made Simple
+### Built-in File Output
+BioC provides dedicated syntax for writing to files safely and concisely.
 
-Built-in syntax for writing to files safely and concisely.
-
+```bioc
 out[result.txt]: "Result is %d", sum(x, y);
+```
 
+Transpiles to:
 
-Compiles into standard C:
-
+```c
 FILE *_fp = fopen("result.txt", "w");
 fprintf(_fp, "Result is %d", sum(x, y));
 fclose(_fp);
+```
 
-• Inline C Support
+### Inline C Support
+Drop directly into standard C whenever necessary.
 
-When needed, you can drop into raw C code directly.
-
+```bioc
 inline_c {
     printf("Inline C OK!\n");
 }
+```
 
-• 100% Portable Output
+### Zero Runtime Overhead
+BioC does not add a runtime layer.  
+Generated C code is simple, portable, and compatible with any compiler.
 
-BioC transpiles to simple and predictable C—no weird macros, no runtime, no overhead.
+---
 
-🔧 Example Transpilation
-BioC Source
+## Example
+
+### BioC Source
+
+```bioc
 int sum(int a, int b) -> int {
     return a + b;
 }
@@ -61,8 +73,11 @@ out[result.txt]: "Result is %d", sum(x, y);
 inline_c {
     printf("Inline C OK!\n");
 }
+```
 
-Generated C Output
+### Generated C Output
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -77,7 +92,7 @@ int main() {
     int y = 7;
     printf("%d\n", sum(x, y));
 
-    { 
+    {
         FILE *_fp = fopen("result.txt", "w");
         fprintf(_fp, "Result is %d", sum(x, y));
         fclose(_fp);
@@ -89,17 +104,7 @@ int main() {
 
     return 0;
 }
+```
 
-🚀 Why BioC?
+---
 
-Write C-compatible programs faster
-
-More readable syntax
-
-Safer defaults
-
-Zero runtime, zero overhead
-
-Works everywhere C works
-
-Perfect for systems programming, embedded, and high-performance workloads
